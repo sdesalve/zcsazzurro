@@ -1,0 +1,10 @@
+{
+  "domain": "zcsazzurro",
+  "name": "ZCSAzzurro by SDeSalve",
+  "documentation": "https://github.com/sdesalve/zcsazzurro",
+  "issue_tracker": "https://github.com/sdesalve/zcsazzurro/issues",
+  "after_dependencies": ["rest"],
+  "codeowners": ["@sdesalve"],
+  "iot_class": "cloud_polling",
+  "version": "0.0.2"
+}
