@@ -5,7 +5,8 @@
 This integration allows you to polling your ZCS Azzurro inverter's realtime data from API.
 
 ## Usage:
-Obtain your Device Serial/ThingKey and your Authorization header value from ZCS Zucchetti
+Obtain your Device Serial/ThingKey and your Authorization header value from ZCS Zucchetti.
+
 Add to configuration.yaml:
 
 ```
