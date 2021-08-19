@@ -28,6 +28,12 @@ Copyright (c) 2021 SDeSalve
 
 See [LICENSE][license]
 
+## Trademark legal notice
+
+This integration is not created, developed, affiliated, supported, maintained or endorsed by **Zucchetti Centro Sistemi S.p.A.**.
+All product names, logos, brands, trademarks and registered trademarks are property of their respective owners. All company, product, and service names used are for identification purposes only.
+Use of these names, logos, trademarks, and brands does not imply endorsement.
+
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/sdesalve/zcsazzurro)
 
