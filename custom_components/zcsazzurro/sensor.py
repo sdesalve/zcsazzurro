@@ -268,14 +268,6 @@ class DSSoutputSensor(SensorEntity):
         self._state = False
 
 
-    # @property
-    # def native_value(self):
-        # """Return the state of the device."""
-        # value = self.dssoutput["thing.find"]["params"]["value"] == True
-        # _LOGGER.debug("Return the native_value: %s", value)
-        # return value
-
-
     @property
     def state(self):
         """Return the state of the device."""
@@ -320,7 +312,6 @@ class DSSoutputSensor(SensorEntity):
                         "energyConsuming": self.dssoutput["current.energyConsuming"]["params"]["value"],
                         "energyAutoconsuming": self.dssoutput["current.energyAutoconsuming"]["params"]["value"],
                     },
-                    "developer": "@SDeSalve",
                 }
             except TypeError:
                 _LOGGER.error("Error cannot find all required keys: %s", self.dssoutput)
