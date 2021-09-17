@@ -18,46 +18,155 @@ sensor:
     
 ```
 
-## Example for extract sensor 
+## Example for extract sensor
 ```
+sensor:
+  - platform: integration
+    name: power_generating_spent_zcs
+    source: sensor.power_generating_zcs
+    unit_prefix: k
+    round: 2    
+    unit: kWh
+    method: left
+    
+##### current   
 template:
   - sensor:
-
-      - name: "Energy Generating ZCS"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = states.sensor.zcsazzurro.attributes.current.energyGenerating | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: measurement
-        device_class: energy
-        icon: mdi:solar-power
-
-      - name: "Power Generating ZCS"
+      - name: "Potenza Istantanea"
         unit_of_measurement: "W"
         state: >
-          {% set power = states.sensor.zcsazzurro.attributes.current.powerGenerating | int | default (0) %}
+          {% set power = states.sensor.fotovoltaico.attributes.current.powerGenerating | int | default (0) %}
           {{ power }}
         state_class: measurement
         device_class: power
         icon: mdi:solar-power
 
-      - name: "Energy Exporting ZCS"
+      - name: "Batteria"
+        unit_of_measurement: "%"
+        state: >
+          {% set energy = states.sensor.fotovoltaico.attributes.current.batterySoC | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: measurement
+        device_class: energy
+        icon: mdi:battery-90
+        
+      - name: "Consumo Giorno Casa"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.zcsazzurro.attributes.current.energyExporting | float | default (0) %}
+          {% set energy = states.sensor.fotovoltaico.attributes.current.energyConsuming | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: measurement
+        device_class: energy
+        icon: mdi:power-socket-it  
+        
+      - name: "Autoconsum Giorno"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.fotovoltaico.attributes.current.energyAutoconsuming | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: measurement
+        device_class: energy
+        icon: mdi:power-plug-outline    
+        
+      - name: "Scarica"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.fotovoltaico.attributes.current.energyDischarging | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: measurement
+        device_class: energy
+        icon: mdi:battery-low 
+        
+      - name: "Carica"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.fotovoltaico.attributes.current.energyCharging | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: measurement
+        device_class: energy
+        icon: mdi:battery-high 
+        
+      - name: "Produzione"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.fotovoltaico.attributes.current.energyGenerating | float | default (0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
         icon: mdi:solar-power
-   
-      - name: "Energy Importing ZCS"
+        
+      - name: "Prelievo"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.zcsazzurro.attributes.current.energyImporting | float | default (0) %}
+          {% set energy = states.sensor.fotovoltaico.attributes.current.energyImporting | float | default (0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
-        icon: mdi:solar-power
+        icon: mdi:transmission-tower  
+        
+      - name: "Immissione"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.fotovoltaico.attributes.current.energyExporting | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: measurement
+        device_class: energy
+        icon: mdi:solar-power 
+           
+##### total         
+      - name: "Produzione Totale"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.fotovoltaico.attributes.total.energyGenerating | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: total_increasing
+        device_class: energy
+        icon: mdi:weather-sunny
+        
+      - name: "Prelievo Totale"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.fotovoltaico.attributes.total.energyImporting | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: total_increasing
+        device_class: energy
+        icon: mdi:transmission-tower
+        
+      - name: "Immissione Totale"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.fotovoltaico.attributes.total.energyExporting | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: total_increasing
+        device_class: energy
+        icon: mdi:flash-circle
+        
+      - name: "Autoconsum Totale"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.fotovoltaico.attributes.total.energyAutoconsuming | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: total_increasing
+        device_class: energy
+        icon: mdi:power-plug-outline 
+        
+      - name: "Scarica Totale"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.fotovoltaico.attributes.total.energyDischarging | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: total_increasing
+        device_class: energy
+        icon: mdi:battery-low
+        
+      - name: "Carica Totale"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.fotovoltaico.attributes.total.energyCharging | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: total_increasing
+        device_class: energy
+        icon: mdi:battery-high
 ```
 
 ## Example sensor for energy panel
