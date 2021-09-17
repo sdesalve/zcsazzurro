@@ -315,6 +315,69 @@ class DSSoutputSensor(SensorEntity):
                 }
             except TypeError:
                 _LOGGER.error("Error cannot find all required keys: %s", self.dssoutput)
+                return {
+                    "lastUpdated": False,
+                    "thing.find": False,
+                    "total": {
+                        "energyGenerating": 0,
+                        "energyCharging": 0,
+                        "energyDischarging": 0,
+                        "energyExporting": 0,
+                        "energyImporting": 0,
+                        "energyConsuming": 0,
+                        "energyAutoconsuming": 0
+                    },
+                    "current": {
+                        "energyGenerating": 0,
+                        "powerGenerating": 0,
+                        "batteryCycletime": 0,
+                        "batterySoC": 0,
+                        "powerCharging": 0,
+                        "powerDischarging": 0,
+                        "powerExporting": 0,
+                        "powerImporting": 0,
+                        "powerConsuming": 0,
+                        "powerAutoconsuming": 0,
+                        "energyCharging": 0,
+                        "energyDischarging": 0,
+                        "energyExporting": 0,
+                        "energyImporting": 0,
+                        "energyConsuming": 0,
+                        "energyAutoconsuming": 0,
+                    },
+                }
+        else:
+            return {
+                "lastUpdated": False,
+                "thing.find": False,
+                "total": {
+                    "energyGenerating": 0,
+                    "energyCharging": 0,
+                    "energyDischarging": 0,
+                    "energyExporting": 0,
+                    "energyImporting": 0,
+                    "energyConsuming": 0,
+                    "energyAutoconsuming": 0
+                },
+                "current": {
+                    "energyGenerating": 0,
+                    "powerGenerating": 0,
+                    "batteryCycletime": 0,
+                    "batterySoC": 0,
+                    "powerCharging": 0,
+                    "powerDischarging": 0,
+                    "powerExporting": 0,
+                    "powerImporting": 0,
+                    "powerConsuming": 0,
+                    "powerAutoconsuming": 0,
+                    "energyCharging": 0,
+                    "energyDischarging": 0,
+                    "energyExporting": 0,
+                    "energyImporting": 0,
+                    "energyConsuming": 0,
+                    "energyAutoconsuming": 0,
+                },
+            }
 
     async def async_update(self):
         """Get the latest data from the ZCSAzzurro API and updates the state."""
@@ -341,7 +404,8 @@ class DSSoutputSensor(SensorEntity):
                     _LOGGER.debug("Erroneous JSON: %s", json_dict)
             else:
                 _LOGGER.warning("Empty reply found when expecting JSON data")
-            
+                self.dssoutput = None
+                self._state = False            
         except TypeError:
             self.dssoutput = None
             self._state = False
