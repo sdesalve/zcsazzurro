@@ -18,6 +18,64 @@ sensor:
     
 ```
 
+## Example for extract sensor 
+```
+template:
+  - sensor:
+
+      - name: "Energy Generating ZCS"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.zcsazzurro.attributes.current.energyGenerating | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: measurement
+        device_class: energy
+        icon: mdi:solar-power
+
+      - name: "Power Generating ZCS"
+        unit_of_measurement: "W"
+        state: >
+          {% set power = states.sensor.zcsazzurro.attributes.current.powerGenerating | int | default (0) %}
+          {{ power }}
+        state_class: measurement
+        device_class: power
+        icon: mdi:solar-power
+
+      - name: "Energy Exporting ZCS"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.zcsazzurro.attributes.current.energyExporting | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: measurement
+        device_class: energy
+        icon: mdi:solar-power
+   
+      - name: "Energy Importing ZCS"
+        unit_of_measurement: "kWh"
+        state: >
+          {% set energy = states.sensor.zcsazzurro.attributes.current.energyImporting | float | default (0) %}
+          {{ energy | round(2) }}
+        state_class: measurement
+        device_class: energy
+        icon: mdi:solar-power
+```
+
+## Example sensor for energy panel
+```
+utility_meter:
+  total_energy_generating_zcs:
+    source: sensor.energy_generating_zcs
+    cycle: daily
+
+  total_energy_exporting_zcs:
+    source: sensor.energy_exporting_zcs
+    cycle: daily
+
+  total_energy_importing_zcs:
+    source: sensor.energy_importing_zcs
+    cycle: daily
+```
+
 ## Authors & contributors
 
 The original setup of this repository is by [SDeSalve][sdesalve].
