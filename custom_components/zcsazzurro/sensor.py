@@ -34,7 +34,7 @@ CONF_AUTHKEY = "authkey"
 DEFAULT_NAME = "ZCSAzzurro"
 DEFAULT_VERIFY_SSL = False
 
-SCAN_INTERVAL = timedelta(minutes=1)
+SCAN_INTERVAL = timedelta(minutes=4)
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
@@ -315,69 +315,6 @@ class DSSoutputSensor(SensorEntity):
                 }
             except TypeError:
                 _LOGGER.error("Error cannot find all required keys: %s", self.dssoutput)
-                return {
-                    "lastUpdated": False,
-                    "thing.find": False,
-                    "total": {
-                        "energyGenerating": -1,
-                        "energyCharging": -1,
-                        "energyDischarging": -1,
-                        "energyExporting": -1,
-                        "energyImporting": -1,
-                        "energyConsuming": -1,
-                        "energyAutoconsuming": -1
-                    },
-                    "current": {
-                        "energyGenerating": -1,
-                        "powerGenerating": -1,
-                        "batteryCycletime": -1,
-                        "batterySoC": -1,
-                        "powerCharging": -1,
-                        "powerDischarging": -1,
-                        "powerExporting": -1,
-                        "powerImporting": -1,
-                        "powerConsuming": -1,
-                        "powerAutoconsuming": -1,
-                        "energyCharging": -1,
-                        "energyDischarging": -1,
-                        "energyExporting": -1,
-                        "energyImporting": -1,
-                        "energyConsuming": -1,
-                        "energyAutoconsuming": -1,
-                    },
-                }
-        else:
-            return {
-                "lastUpdated": False,
-                "thing.find": False,
-                "total": {
-                    "energyGenerating": -1,
-                    "energyCharging": -1,
-                    "energyDischarging": -1,
-                    "energyExporting": -1,
-                    "energyImporting": -1,
-                    "energyConsuming": -1,
-                    "energyAutoconsuming": -1
-                },
-                "current": {
-                    "energyGenerating": -1,
-                    "powerGenerating": -1,
-                    "batteryCycletime": -1,
-                    "batterySoC": -1,
-                    "powerCharging": -1,
-                    "powerDischarging": -1,
-                    "powerExporting": -1,
-                    "powerImporting": -1,
-                    "powerConsuming": -1,
-                    "powerAutoconsuming": -1,
-                    "energyCharging": -1,
-                    "energyDischarging": -1,
-                    "energyExporting": -1,
-                    "energyImporting": -1,
-                    "energyConsuming": -1,
-                    "energyAutoconsuming": -1,
-                },
-            }
 
     async def async_update(self):
         """Get the latest data from the ZCSAzzurro API and updates the state."""
