@@ -3,6 +3,7 @@
 [![Buy me a coffee][buymeacoffee-shield]][buymeacoffee] [![Support my work on Paypal][paypal-shield]][paypal]
 
 This integration allows you to polling your ZCS Azzurro inverter's realtime data from API.
+
 Now support the new ZCS API.
 
 ## Usage:
@@ -189,6 +190,7 @@ utility_meter:
 ## Authors & contributors
 
 The original setup of this repository is by [SDeSalve][sdesalve].
+
 Thanks to Alesoft73 for their support to implement new API.
 
 ## License
