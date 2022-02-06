@@ -36,7 +36,7 @@ template:
       - name: "Potenza Istantanea"
         unit_of_measurement: "W"
         state: >
-          {% set power = states.sensor.fotovoltaico.attributes.current.powerGenerating | int | default (0) %}
+          {% set power = states.sensor.test_zcsazzurro.attributes.current.powerGenerating | int | default (0) %}
           {{ power }}
         state_class: measurement
         device_class: power
@@ -45,7 +45,7 @@ template:
       - name: "Batteria"
         unit_of_measurement: "%"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.current.batterySoC | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.current.batterySoC | float | default (0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -54,7 +54,7 @@ template:
       - name: "Consumo Giorno Casa"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.current.energyConsuming | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyConsuming | float | default (0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -63,7 +63,7 @@ template:
       - name: "Autoconsum Giorno"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.current.energyAutoconsuming | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyAutoconsuming | float | default (0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -72,7 +72,7 @@ template:
       - name: "Scarica"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.current.energyDischarging | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyDischarging | float | default (0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -81,7 +81,7 @@ template:
       - name: "Carica"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.current.energyCharging | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyCharging | float | default (0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -90,7 +90,7 @@ template:
       - name: "Produzione"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.current.energyGenerating | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyGenerating | float | default (0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -99,7 +99,7 @@ template:
       - name: "Prelievo"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.current.energyImporting | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyImporting | float | default (0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -108,7 +108,7 @@ template:
       - name: "Immissione"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.current.energyExporting | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyExporting | float | default (0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -118,7 +118,7 @@ template:
       - name: "Produzione Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.total.energyGenerating | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyGenerating | float | default (0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -127,7 +127,7 @@ template:
       - name: "Prelievo Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.total.energyImporting | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyImporting | float | default (0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -136,7 +136,7 @@ template:
       - name: "Immissione Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.total.energyExporting | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyExporting | float | default (0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -145,7 +145,7 @@ template:
       - name: "Autoconsum Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.total.energyAutoconsuming | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyAutoconsuming | float | default (0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -154,7 +154,7 @@ template:
       - name: "Scarica Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.total.energyDischarging | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyDischarging | float | default (0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -163,7 +163,7 @@ template:
       - name: "Carica Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.fotovoltaico.attributes.total.energyCharging | float | default (0) %}
+          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyCharging | float | default (0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
