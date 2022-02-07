@@ -113,44 +113,115 @@ class DSSoutputSensor(SensorEntity):
     @property
     def extra_state_attributes(self):
         """Return the state attributes of the monitored installation."""
+
         if self.dssoutput is not None:
-            try:
-                thing_key = self._thing_key
-                _LOGGER.debug("Return the state attributes")
-                _LOGGER.debug("thingkey: %s", thing_key)
-                return {
-                    "lastUpdated": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["lastUpdate"],
-                    "thing.find": thing_key,
-                    "total": {
-                        "energyGenerating": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyGeneratingTotal"],
-                        "energyCharging": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyChargingTotal"],
-                        "energyDischarging": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyDischargingTotal"],
-                        "energyExporting": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyExportingTotal"],
-                        "energyImporting": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyImportingTotal"],
-                        "energyConsuming": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyConsumingTotal"],
-                        "energyAutoconsuming": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyAutoconsumingTotal"],
-                    },
-                    "current": {
-                        "energyGenerating": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyGenerating"],
-                        "powerGenerating": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerGenerating"],
-                        "batteryCycletime": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["batteryCycletime"],
-                        "batterySoC": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["batterySoC"],
-                        "powerCharging": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerCharging"],
-                        "powerDischarging": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerDischarging"],
-                        "powerExporting": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerExporting"],
-                        "powerImporting": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerImporting"],
-                        "powerConsuming": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerConsuming"],
-                        "powerAutoconsuming": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerAutoconsuming"],
-                        "energyCharging": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyCharging"],
-                        "energyDischarging": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyDischarging"],
-                        "energyExporting": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyExporting"],
-                        "energyImporting": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyImporting"],
-                        "energyConsuming": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyConsuming"],
-                        "energyAutoconsuming": self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyAutoconsuming"],
-                    },
-                }
-            except TypeError:
-                _LOGGER.error("Error cannot find all required keys: %s", self.dssoutput)
+            thing_key = self._thing_key
+            _LOGGER.debug("Return the state attributes")
+            _LOGGER.debug("thingkey: %s", thing_key)
+            
+            try: lastUpdated = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["lastUpdate"]
+            except: lastUpdated = 0
+             
+            try: energyGeneratingTotal = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyGeneratingTotal"]
+            except: energyGeneratingTotal = 0
+
+            try: energyChargingTotal = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyChargingTotal"]
+            except: energyChargingTotal = 0
+
+            try: energyDischargingTotal = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyDischargingTotal"]
+            except: energyDischargingTotal = 0
+
+            try: energyExportingTotal = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyExportingTotal"]
+            except: energyExportingTotal = 0
+
+            try: energyImportingTotal = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyImportingTotal"]
+            except: energyImportingTotal = 0
+
+            try: energyConsumingTotal = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyConsumingTotal"]
+            except: energyConsumingTotal = 0
+
+            try: energyAutoconsumingTotal = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyAutoconsumingTotal"]
+            except: energyAutoconsumingTotal = 0
+
+            try: energyGenerating = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyGenerating"]
+            except: energyGenerating = 0
+
+            try: powerGenerating = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerGenerating"]
+            except: powerGenerating = 0
+
+            try: batteryCycletime = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["batteryCycletime"]
+            except: batteryCycletime = 0
+
+            try: batterySoC = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["batterySoC"]
+            except: batterySoC = 0
+
+            try: powerCharging = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerCharging"]
+            except: powerCharging = 0
+
+            try: powerDischarging = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerDischarging"]
+            except: powerDischarging = 0
+
+            try: powerExporting = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerExporting"]
+            except: powerExporting = 0
+
+            try: powerImporting = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerImporting"]
+            except: powerImporting = 0
+
+            try: powerConsuming = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerConsuming"]
+            except: powerConsuming = 0
+
+            try: powerAutoconsuming = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["powerAutoconsuming"]
+            except: powerAutoconsuming = 0
+
+            try: energyCharging = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyCharging"]
+            except: energyCharging = 0
+
+            try: energyDischarging = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyDischarging"]
+            except: energyDischarging = 0
+
+            try: energyExporting = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyExporting"]
+            except: energyExporting = 0
+
+            try: energyImporting = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyImporting"]
+            except: energyImporting = 0
+
+            try: energyConsuming = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyConsuming"]
+            except: energyConsuming = 0
+
+            try: energyAutoconsuming = self.dssoutput["realtimeData"]["params"]["value"][0][thing_key]["energyAutoconsuming"]
+            except: energyAutoconsuming = 0
+
+            return {
+                "lastUpdated": lastUpdated,
+                "thing.find": thing_key,
+                "total": {
+                    "energyGenerating": energyGeneratingTotal,
+                    "energyCharging": energyChargingTotal,
+                    "energyDischarging": energyDischargingTotal,
+                    "energyExporting": energyExportingTotal,
+                    "energyImporting": energyImportingTotal,
+                    "energyConsuming": energyConsumingTotal,
+                    "energyAutoconsuming": energyAutoconsumingTotal,
+                },
+                "current": {
+                    "energyGenerating": energyGenerating,
+                    "powerGenerating": powerGenerating,
+                    "batteryCycletime": batteryCycletime,
+                    "batterySoC": batterySoC,
+                    "powerCharging": powerCharging,
+                    "powerDischarging": powerDischarging,
+                    "powerExporting": powerExporting,
+                    "powerImporting": powerImporting,
+                    "powerConsuming": powerConsuming,
+                    "powerAutoconsuming": powerAutoconsuming,
+                    "energyCharging": energyCharging,
+                    "energyDischarging": energyDischarging,
+                    "energyExporting": energyExporting,
+                    "energyImporting": energyImporting,
+                    "energyConsuming": energyConsuming,
+                    "energyAutoconsuming": energyAutoconsuming,
+                },
+            }
 
     async def async_update(self):
         """Get the latest data from the ZCSAzzurro API and updates the state."""
