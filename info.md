@@ -37,7 +37,7 @@ template:
       - name: "Potenza Istantanea"
         unit_of_measurement: "W"
         state: >
-          {% set power = states.sensor.test_zcsazzurro.attributes.current.powerGenerating | int | default (0) %}
+          {% set power = state_attr('sensor.zcsa','current')['powerGenerating'] | int(0) %}
           {{ power }}
         state_class: measurement
         device_class: power
@@ -46,7 +46,7 @@ template:
       - name: "Batteria"
         unit_of_measurement: "%"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.batterySoC | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','current')['batterySoC'] | float(0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -55,7 +55,7 @@ template:
       - name: "Consumo Giorno Casa"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyConsuming | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','current')['energyConsuming'] | float(0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -64,7 +64,7 @@ template:
       - name: "Autoconsum Giorno"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyAutoconsuming | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','current')['energyAutoconsuming'] | float(0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -73,7 +73,7 @@ template:
       - name: "Scarica"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyDischarging | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','current')['energyDischarging'] | float(0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -82,7 +82,7 @@ template:
       - name: "Carica"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyCharging | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','current')['energyCharging'] | float(0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -91,7 +91,7 @@ template:
       - name: "Produzione"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyGenerating | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','current')['energyGenerating'] | float(0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -100,7 +100,7 @@ template:
       - name: "Prelievo"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyImporting | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','current')['energyImporting'] | float(0)%}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -109,7 +109,7 @@ template:
       - name: "Immissione"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyExporting | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','current')['energyExporting'] | float (0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -119,7 +119,7 @@ template:
       - name: "Produzione Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyGenerating | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','total')['energyGenerating'] | float(0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -128,7 +128,7 @@ template:
       - name: "Prelievo Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyImporting | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','total')['energyImporting'] | float (0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -137,7 +137,7 @@ template:
       - name: "Immissione Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyExporting | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','total')['energyExporting'] | float(0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -146,7 +146,7 @@ template:
       - name: "Autoconsum Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyAutoconsuming | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','total')['energyAutoconsuming'] | float(0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -155,7 +155,7 @@ template:
       - name: "Scarica Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyDischarging | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','total')['energyDischarging'] | float(0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -164,7 +164,7 @@ template:
       - name: "Carica Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyCharging | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','total')['energyCharging'] | float(0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
