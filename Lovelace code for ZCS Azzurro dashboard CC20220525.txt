@@ -1,0 +1,55 @@
+title: Casa
+views:
+  - path: default_view
+    title: Home
+    cards:
+      - type: entities
+        entities:
+          - entity: sensor.zcsa_cp_generata_pannelli
+          - entity: sensor.zcsa_cp_scarica_batterie
+          - entity: sensor.zcsa_cp_prelevata_da_rete
+          - entity: sensor.zcsa_cp_consumo
+          - entity: sensor.zcsa_cp_carica_batterie
+          - entity: sensor.zcsa_cp_immessa_in_rete
+          - entity: sensor.zcsa_cp_autoconsumo
+        title: ZCS AZZURRO - Potenza
+        state_color: true
+      - type: entities
+        entities:
+          - entity: sensor.zcsa_ce_generata_pannelli
+          - entity: sensor.zcsa_ce_scaricata_da_batterie
+          - entity: sensor.zcsa_ce_prelevata_da_rete
+          - entity: sensor.zcsa_ce_consumo
+          - entity: sensor.zcsa_ce_caricata_su_batterie
+          - entity: sensor.zcsa_ce_immessa_in_rete
+          - entity: sensor.zcsa_ce_autoconsumo
+        title: ZCS AZZURRO - Energia giornaliera
+      - type: entities
+        entities:
+          - entity: sensor.zcsa_te_generata_pannelli
+          - entity: sensor.zcsa_te_scaricata_da_batterie
+          - entity: sensor.zcsa_te_prelevata_da_rete
+          - entity: sensor.zcsa_te_consumata
+          - entity: sensor.zcsa_te_caricata_su_batterie
+          - entity: sensor.zcsa_te_immessa_in_rete
+          - entity: sensor.zcsa_te_autoconsumata
+        title: ZCS AZZURRO - Energia Totale
+        state_color: true
+      - type: entities
+        entities:
+          - entity: sensor.zcsa
+            secondary_info: none
+            name: Stato collegamento Inverter
+          - entity: sensor.zcsa_cb_cicli_di_carica
+            name: Cicli di ricarica Batterie
+          - entity: sensor.zcsa_lastupdated
+        title: ZCS AZZURRO
+        state_color: true
+      - type: gauge
+        entity: sensor.zcsa_cb_percentuale_di_carica
+        severity:
+          green: 60
+          yellow: 30
+          red: 0
+        needle: true
+        name: ZCS Azzurro Carica Batterie
