@@ -28,7 +28,6 @@ sensor:
     source: sensor.power_generating_zcs
     unit_prefix: k
     round: 2    
-    unit: kWh
     method: left
     
 ##### current   
