@@ -251,7 +251,7 @@ template:
       - name: "zcsa.tE.Consumata"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = state_attr('sensor.zcsa','total')[energyConsuming | float | default (0) %}
+          {% set energy = state_attr('sensor.zcsa','total')[energyConsuming] | float | default (0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
