@@ -26,233 +26,234 @@ sensor:
 
 template:
   - sensor:
+    # Lastupdated
+    - name: "zcsa.lastUpdated"
+      unit_of_measurement: ""
+      state: >
+        {% set lastUpd = state_attr('sensor.zcsa','lastUpdated') %}
+        {{ lastUpd }}
+      state_class: measurement
+      device_class: timestamp
+      icon: mdi:calendar
+    
     # provo ad estrarre lastupdate, troncarlo dopo 10 e aggiungete un time fisso
-      - name: "zcsa.lastUpdated_day"
-        unit_of_measurement: "T"
-        state: >
-          {% set lastUpd= state_attr('sensor.zcsa')[lastUpdated] | truncate(10,False,'') %}
-          {{ lastUpd ~ "T00:00:00Z" }}
-        state_class: measurement
-        device_class: timestamp
-        icon: mdi:calendar
-        
-      - name: "zcsa.lastUpdated"
-        unit_of_measurement: ""
-        state: >
-          {% set lastUpd= state_attr('sensor.zcsa')[lastUpdated] %}
-          {{ lastUpd }}
-        state_class: measurement
-        device_class: timestamp
-        icon: mdi:calendar
-      
+    - name: "zcsa.lastUpdated_day"
+      unit_of_measurement: "T"
+      state: >
+        {% set lastUpd= state_attr('sensor.zcsa','lastUpdated') | truncate(10,False,'') %}
+        {{ lastUpd ~ "T00:00:00Z" }}
+      state_class: measurement
+      device_class: timestamp
+      icon: mdi:calendar
+    
     # Batteria
-      - name: "zcsa.cB.Percentuale_di_carica"
-        unit_of_measurement: "%"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','current')[batterySoC] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: measurement
-        device_class: battery
-        icon: mdi:battery-charging-medium
+    - name: "zcsa.cB.Percentuale_di_carica"
+      unit_of_measurement: "%"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','current')['batterySoC'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: measurement
+      device_class: battery
+      icon: mdi:battery-charging-medium
 
-      - name: "zcsa.cB.Cicli_di_carica"
-        unit_of_measurement: "N"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','current')[batteryCycletime] | int | default (0) %}
-          {{ energy | round(0) }}
-        state_class: measurement
-        device_class: battery
-        icon: mdi:power-cycle
+    - name: "zcsa.cB.Cicli_di_carica"
+      unit_of_measurement: "N"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','current')['batteryCycletime'] | int | default (0) %}
+        {{ energy | round(0) }}
+      state_class: measurement
+      device_class: battery
+      icon: mdi:power-cycle
             
     # Potenza - Unità di misura Watt
-      - name: "zcsa.cP.Generata_Pannelli"
-        unit_of_measurement: "W"
-        state: >
-          {% set power = state_attr('sensor.zcsa','current')[powerGenerating] | int | default (0) %}
-          {{ power }}
-        state_class: measurement
-        device_class: power
-        icon: mdi:solar-panel-large
+    - name: "zcsa.cP.Generata_Pannelli"
+      unit_of_measurement: "W"
+      state: >
+        {% set power = state_attr('sensor.zcsa','current')['powerGenerating'] | int | default (0) %}
+        {{ power }}
+      state_class: measurement
+      device_class: power
+      icon: mdi:solar-panel-large
     
-      - name: "zcsa.cP.Scarica_Batterie"
-        unit_of_measurement: "W"
-        state: >
-          {% set power = state_attr('sensor.zcsa','current')[powerDischarging] | int | default (0) %}
-          {{ power }}
-        state_class: measurement
-        device_class: power
-        icon: mdi:battery-arrow-down
+    - name: "zcsa.cP.Scarica_Batterie"
+      unit_of_measurement: "W"
+      state: >
+        {% set power = state_attr('sensor.zcsa','current')['powerDischarging'] | int | default (0) %}
+        {{ power }}
+      state_class: measurement
+      device_class: power
+      icon: mdi:battery-arrow-down
 
-      - name: "zcsa.cP.Carica_Batterie"
-        unit_of_measurement: "W"
-        state: >
-          {% set power = state_attr('sensor.zcsa','current')[powerCharging] | int | default (0) %}
-          {{ power }}
-        state_class: measurement
-        device_class: power
-        icon: mdi:battery-arrow-up
+    - name: "zcsa.cP.Carica_Batterie"
+      unit_of_measurement: "W"
+      state: >
+        {% set power = state_attr('sensor.zcsa','current')['powerCharging'] | int | default (0) %}
+        {{ power }}
+      state_class: measurement
+      device_class: power
+      icon: mdi:battery-arrow-up
     
-      - name: "zcsa.cP.Immessa_in_rete"
-        unit_of_measurement: "W"
-        state: >
-          {% set power = state_attr('sensor.zcsa','current')[powerExporting] | int | default (0) %}
-          {{ power }}
-        state_class: measurement
-        device_class: power
-        icon: mdi:transmission-tower-import
+    - name: "zcsa.cP.Immessa_in_rete"
+      unit_of_measurement: "W"
+      state: >
+        {% set power = state_attr('sensor.zcsa','current')['powerExporting'] | int | default (0) %}
+        {{ power }}
+      state_class: measurement
+      device_class: power
+      icon: mdi:transmission-tower-import
 
-      - name: "zcsa.cP.Prelevata_da_rete"
-        unit_of_measurement: "W"
-        state: >
-          {% set power = state_attr('sensor.zcsa','current')[powerImporting] | int | default (0) %}
-          {{ power }}
-        state_class: measurement
-        device_class: power
-        icon: mdi:transmission-tower-export
+    - name: "zcsa.cP.Prelevata_da_rete"
+      unit_of_measurement: "W"
+      state: >
+        {% set power = state_attr('sensor.zcsa','current')['powerImporting'] | int | default (0) %}
+        {{ power }}
+      state_class: measurement
+      device_class: power
+      icon: mdi:transmission-tower-export
 
-      - name: "zcsa.cP.Consumo"
-        unit_of_measurement: "W"
-        state: >
-          {% set power = state_attr('sensor.zcsa','current')[powerConsuming] | int | default (0) %}
-          {{ power }}
-        state_class: measurement
-        device_class: power
-        icon: mdi:power-plug
+    - name: "zcsa.cP.Consumo"
+      unit_of_measurement: "W"
+      state: >
+        {% set power = state_attr('sensor.zcsa','current')['powerConsuming'] | int | default (0) %}
+        {{ power }}
+      state_class: measurement
+      device_class: power
+      icon: mdi:power-plug
 
-      - name: "zcsa.cP.Autoconsumo"
-        unit_of_measurement: "W"
-        state: >
-          {% set power = state_attr('sensor.zcsa','current')[powerAutoconsuming] | int | default (0) %}
-          {{ power }}
-        state_class: measurement
-        device_class: power
-        icon: mdi:power-plug-outline
+    - name: "zcsa.cP.Autoconsumo"
+      unit_of_measurement: "W"
+      state: >
+        {% set power = state_attr('sensor.zcsa','current')['powerAutoconsuming'] | int | default (0) %}
+        {{ power }}
+      state_class: measurement
+      device_class: power
+      icon: mdi:power-plug-outline
 
     # Energia (Lavoro) Giorno corrente
-      - name: "zcsa.cE.Consumo"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','current')[energyConsuming] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: total_increasing
-        # last_reset: '2000-01-01T00:00:00'
-        device_class: energy
-        icon: mdi:power-plug 
+    - name: "zcsa.cE.Consumo"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','current')['energyConsuming'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: total_increasing
+      # last_reset: '2000-01-01T00:00:00'
+      device_class: energy
+      icon: mdi:power-plug 
 
-      - name: "zcsa.cE.Autoconsumo"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','current')[energyAutoconsuming] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: measurement
-        device_class: energy
-        icon: mdi:power-plug-outline    
-        
-      - name: "zcsa.cE.Scaricata_da_Batterie"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','current')[energyDischarging] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: total_increasing
-        device_class: energy
-        icon: mdi:battery-arrow-down
-        
-      - name: "zcsa.cE.Caricata_su_Batterie"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','current')[energyCharging] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: total_increasing
-        device_class: energy
-        icon: mdi:battery-arrow-up
-        
-      - name: "zcsa.cE.Generata_Pannelli"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','current')[energyGenerating] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: total_increasing
-        device_class: energy
-        icon: mdi:solar-panel-large
+    - name: "zcsa.cE.Autoconsumo"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','current')['energyAutoconsuming'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: measurement
+      device_class: energy
+      icon: mdi:power-plug-outline    
+      
+    - name: "zcsa.cE.Scaricata_da_Batterie"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','current')['energyDischarging'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: total_increasing
+      device_class: energy
+      icon: mdi:battery-arrow-down
+      
+    - name: "zcsa.cE.Caricata_su_Batterie"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','current')['energyCharging'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: total_increasing
+      device_class: energy
+      icon: mdi:battery-arrow-up
+      
+    - name: "zcsa.cE.Generata_Pannelli"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','current')['energyGenerating'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: total_increasing
+      device_class: energy
+      icon: mdi:solar-panel-large
 
-      - name: "zcsa.cE.Prelevata_da_rete"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','current')[energyImporting] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: total_increasing
-        device_class: energy
-        icon: mdi:transmission-tower-export  
+    - name: "zcsa.cE.Prelevata_da_rete"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','current')['energyImporting'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: total_increasing
+      device_class: energy
+      icon: mdi:transmission-tower-export  
         
-      - name: "zcsa.cE.Immessa_in_rete"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','current')[energyExporting] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: total_increasing
-        device_class: energy
-        icon: mdi:transmission-tower-import
+    - name: "zcsa.cE.Immessa_in_rete"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','current')['energyExporting'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: total_increasing
+      device_class: energy
+      icon: mdi:transmission-tower-import
         
     ##### total         
-      - name: "zcsa.tE.Generata_Pannelli"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','total')[energyGenerating] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: total_increasing
-        device_class: energy
-        icon: mdi:solar-panel-large
+    - name: "zcsa.tE.Generata_Pannelli"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','total')['energyGenerating'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: total_increasing
+      device_class: energy
+      icon: mdi:solar-panel-large
                 
-      - name: "zcsa.tE.Prelevata_da_rete"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','total')[energyImporting] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: total_increasing
-        device_class: energy
-        icon: mdi:transmission-tower-export
+    - name: "zcsa.tE.Prelevata_da_rete"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','total')['energyImporting'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: total_increasing
+      device_class: energy
+      icon: mdi:transmission-tower-export
         
-      - name: "zcsa.tE.Immessa_in_rete"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','total')[energyExporting] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: total_increasing
-        device_class: energy
-        icon: mdi:transmission-tower-import
+    - name: "zcsa.tE.Immessa_in_rete"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','total')['energyExporting'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: total_increasing
+      device_class: energy
+      icon: mdi:transmission-tower-import
         
-      - name: "zcsa.tE.Autoconsumata"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','total')[energyAutoconsuming] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: total_increasing
-        device_class: energy
-        icon: mdi:power-plug-outline 
+    - name: "zcsa.tE.Autoconsumata"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','total')['energyAutoconsuming'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: total_increasing
+      device_class: energy
+      icon: mdi:power-plug-outline 
         
-      - name: "zcsa.tE.Scaricata_da_Batterie"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','total')[energyDischarging] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: total_increasing
-        device_class: energy
-        icon: mdi:battery-arrow-down
+    - name: "zcsa.tE.Scaricata_da_Batterie"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','total')['energyDischarging'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: total_increasing
+      device_class: energy
+      icon: mdi:battery-arrow-down
         
-      - name: "zcsa.tE.Caricata_su_Batterie"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','total')[energyCharging] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: total_increasing
-        device_class: energy
-        icon: mdi:battery-arrow-up
+    - name: "zcsa.tE.Caricata_su_Batterie"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','total')['energyCharging'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: total_increasing
+      device_class: energy
+      icon: mdi:battery-arrow-up
 
-      - name: "zcsa.tE.Consumata"
-        unit_of_measurement: "kWh"
-        state: >
-          {% set energy = state_attr('sensor.zcsa','total')[energyConsuming] | float | default (0) %}
-          {{ energy | round(2) }}
-        state_class: total_increasing
-        device_class: energy
-        icon: mdi:power-plug 
+    - name: "zcsa.tE.Consumata"
+      unit_of_measurement: "kWh"
+      state: >
+        {% set energy = state_attr('sensor.zcsa','total')['energyConsuming'] | float | default (0) %}
+        {{ energy | round(2) }}
+      state_class: total_increasing
+      device_class: energy
+      icon: mdi:power-plug 
