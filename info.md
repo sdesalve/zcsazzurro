@@ -17,6 +17,7 @@ sensor:
     name: test_zcsazzurro
     thingkey: [YOUR DEVICE SERIAL - THINGKEY]
     authkey: [YOUR AUTHORIZATION HEADER VALUE]
+    clientcode: [YOUR CLIENT CODE HERE]
     
 ```
 
