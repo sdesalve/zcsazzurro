@@ -1,4 +1,4 @@
-# SDeSalve Home Assistant Integration: ZCSAzzurro
+# SDeSalve Home Assistant Integration: test_zcsazzurro
 
 [![Buy me a coffee][buymeacoffee-shield]][buymeacoffee] [![Support my work on Paypal][paypal-shield]][paypal]
 
@@ -13,11 +13,10 @@ Add to configuration.yaml:
 
 ```
 sensor:
-  - platform: zcsazzurro
-    name: test_zcsazzurro
+  - platform: test_zcsazzurro
+    name: test_test_zcsazzurro
     thingkey: [YOUR DEVICE SERIAL - THINGKEY]
     authkey: [YOUR AUTHORIZATION HEADER VALUE]
-    clientcode: [YOUR CLIENT CODE HERE]
     
 ```
 
@@ -37,7 +36,7 @@ template:
       - name: "Potenza Istantanea"
         unit_of_measurement: "W"
         state: >
-          {% set power = states.sensor.test_zcsazzurro.attributes.current.powerGenerating | int | default (0) %}
+          {% set power = state_attr('sensor.test_zcsazzurro','current')['powerGenerating'] | int(0) %}
           {{ power }}
         state_class: measurement
         device_class: power
@@ -46,7 +45,7 @@ template:
       - name: "Batteria"
         unit_of_measurement: "%"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.batterySoC | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','current')['batterySoC'] | float(0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -55,7 +54,7 @@ template:
       - name: "Consumo Giorno Casa"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyConsuming | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','current')['energyConsuming'] | float(0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -64,7 +63,7 @@ template:
       - name: "Autoconsum Giorno"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyAutoconsuming | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','current')['energyAutoconsuming'] | float(0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -73,7 +72,7 @@ template:
       - name: "Scarica"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyDischarging | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','current')['energyDischarging'] | float(0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -82,7 +81,7 @@ template:
       - name: "Carica"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyCharging | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','current')['energyCharging'] | float(0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -91,7 +90,7 @@ template:
       - name: "Produzione"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyGenerating | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','current')['energyGenerating'] | float(0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -100,7 +99,7 @@ template:
       - name: "Prelievo"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyImporting | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','current')['energyImporting'] | float(0)%}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -109,7 +108,7 @@ template:
       - name: "Immissione"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.current.energyExporting | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','current')['energyExporting'] | float (0) %}
           {{ energy | round(2) }}
         state_class: measurement
         device_class: energy
@@ -119,7 +118,7 @@ template:
       - name: "Produzione Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyGenerating | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','total')['energyGenerating'] | float(0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -128,7 +127,7 @@ template:
       - name: "Prelievo Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyImporting | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','total')['energyImporting'] | float (0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -137,7 +136,7 @@ template:
       - name: "Immissione Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyExporting | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','total')['energyExporting'] | float(0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -146,7 +145,7 @@ template:
       - name: "Autoconsum Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyAutoconsuming | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','total')['energyAutoconsuming'] | float(0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -155,7 +154,7 @@ template:
       - name: "Scarica Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyDischarging | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','total')['energyDischarging'] | float(0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -164,7 +163,7 @@ template:
       - name: "Carica Totale"
         unit_of_measurement: "kWh"
         state: >
-          {% set energy = states.sensor.test_zcsazzurro.attributes.total.energyCharging | float | default (0) %}
+          {% set energy = state_attr('sensor.test_zcsazzurro','total')['energyCharging'] | float(0) %}
           {{ energy | round(2) }}
         state_class: total_increasing
         device_class: energy
@@ -206,11 +205,11 @@ All product names, logos, brands, trademarks and registered trademarks are prope
 Use of these names, logos, trademarks, and brands does not imply endorsement.
 
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/sdesalve/zcsazzurro)
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/sdesalve/test_zcsazzurro)
 
 [buymeacoffee-shield]: https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg
 [buymeacoffee]: https://www.buymeacoffee.com/sdesalve
 [paypal-shield]: https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif
 [paypal]: https://paypal.me/SDeSalve
-[license]: https://github.com/sdesalve/zcsazzurro/LICENSE.md
+[license]: https://github.com/sdesalve/test_zcsazzurro/LICENSE.md
 [sdesalve]: https://github.com/sdesalve
