@@ -81,7 +81,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     _LOGGER.debug("payload: %s", string_payload)
     _LOGGER.debug("verify_ssl: %s", verify_ssl)
     
-    rest = RestData(hass, method, _ENDPOINT, auth, headers, None, string_payload, verify_ssl, timeout)
+    rest = RestData(hass, method, _ENDPOINT, 'utf8', auth, headers, None, string_payload, verify_ssl, timeout)
     await rest.async_update()
 
     if rest.data is None:
