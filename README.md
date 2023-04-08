@@ -1,5 +1,5 @@
 # SDeSalve Home Assistant Integration: zcsazzurro
-
+# deprecated - It's not maintained anymore #
 [![Buy me a coffee][buymeacoffee-shield]][buymeacoffee] [![Support my work on Paypal][paypal-shield]][paypal]
 
 This integration allows you to polling your ZCS Azzurro inverter's realtime data from API.
